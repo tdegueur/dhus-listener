@@ -3,12 +3,16 @@ package dhus.listener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+// ssh dhus@91.134.230.97 'java -jar ~/dhus/dhus-listener.jar 3'
 public class DhusListener {
-   private static void listenToFile(String fileName) throws IOException, InterruptedException {
-      BufferedReader reader = Files.newBufferedReader(Paths.get(".", fileName));
+   private static void listenToFile(String fileName)
+         throws IOException, InterruptedException {
+      BufferedReader reader = 
+            Files.newBufferedReader(Paths.get(fileName), Charset.forName("UTF-8"));
       String line = null;
       while(true) {
          line = reader.readLine();
@@ -31,13 +35,14 @@ public class DhusListener {
       }
    }
    
-   public static void main(String[] args) throws IOException, InterruptedException, URISyntaxException {
-      int delay = 300_000;
+   public static void main(String[] args) 
+         throws IOException, InterruptedException, URISyntaxException {
+      int delay = 300000;
       if(args.length > 0) {
          delay = Integer.parseInt(args[0])*1000;
       }
       
-      String fileName;
+      final String fileName;
       if(args.length > 1) {
          fileName = args[1];
       } else {
