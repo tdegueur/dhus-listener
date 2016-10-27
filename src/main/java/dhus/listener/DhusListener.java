@@ -30,7 +30,8 @@ public class DhusListener {
             
             // sleep for a second and recreate the reader
             Thread.sleep(1000);
-            reader = Files.newBufferedReader(Paths.get(".", fileName));
+            reader =
+                  Files.newBufferedReader(Paths.get(fileName), Charset.forName("UTF-8"));
          }
       }
    }
