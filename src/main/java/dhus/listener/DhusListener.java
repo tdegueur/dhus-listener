@@ -5,33 +5,36 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 // ssh dhus@91.134.230.97 'java -jar ~/dhus/dhus-listener.jar 3'
 public class DhusListener {
    private static void listenToFile(String fileName)
          throws IOException, InterruptedException {
-      BufferedReader reader = 
-            Files.newBufferedReader(Paths.get(fileName), Charset.forName("UTF-8"));
-      String line = null;
       while(true) {
-         line = reader.readLine();
-         if(line != null) {
-            if(line.contains("Server is ready...")) {
-               // dhus is ready
-               System.out.println("DHuS is ready!");
+         Path path = Paths.get(fileName);
+         if(Files.exists(path)) {
+            BufferedReader reader = 
+                  Files.newBufferedReader(Paths.get(fileName), Charset.forName("UTF-8"));
+            String line = reader.readLine();
+            if(line != null) {
+               if(line.contains("Server is ready...")) {
+                  // dhus is ready
+                  System.out.println("DHuS is ready!");
+                  reader.close();
+                  System.exit(0); // normal status returned (0)
+               }
+            } else {
+               // end of logs reached, close the reader
+               System.out.println("End of logs, resetting...");
                reader.close();
-               System.exit(0); // normal status returned (0)
+               Thread.sleep(1000);
             }
          } else {
-            // end of logs reached, close the reader
-            System.out.println("End of logs, resetting...");
-            reader.close();
-            
-            // sleep for a second and recreate the reader
+            // log file does not exist yet
+            System.out.println("Logs not found, checking again...");
             Thread.sleep(1000);
-            reader =
-                  Files.newBufferedReader(Paths.get(fileName), Charset.forName("UTF-8"));
          }
       }
    }
