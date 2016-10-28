@@ -5,13 +5,24 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class DhusListener {
    private static void listenToFile(String fileName)
          throws IOException, InterruptedException {
+      
+      // wait for the log file to be generated
+      Path path = Paths.get(fileName);
+      while(!Files.exists(path)) {
+         Thread.sleep(1000);
+      }
+      
+      // open reader
       BufferedReader reader = Files.newBufferedReader(
-            Paths.get(fileName), Charset.forName("UTF-8"));
+            path, Charset.forName("UTF-8"));
+      
+      // start reading
       while(true) {
          String line = reader.readLine();
          if(line != null) {
@@ -34,11 +45,14 @@ public class DhusListener {
    
    public static void main(String[] args) 
          throws IOException, InterruptedException, URISyntaxException {
+      
+      // deal with first argument (allowed delay for the dhus to start)
       int delay = 300000;
       if(args.length > 0) {
          delay = Integer.parseInt(args[0])*1000;
       }
       
+      // deal with second argument (file path of the dhus' logs)
       final String fileName;
       if(args.length > 1) {
          fileName = args[1];
