@@ -152,11 +152,10 @@ nohup java -server -XX:MaxPermSize=256m -Xms12g -Xmx12g          \
 
 PID=$!
 echo $PID > dhus.pid
+disown $PID
 wait $PID
 
 if [ $? -eq 8 ]
 then
    . $0
 fi
-
-disown $PID
