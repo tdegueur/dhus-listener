@@ -1,0 +1,9 @@
+Id
+Date
+RemoteIp
+Request
+Duration
+ContentLength
+WrittenContentLength
+Status
+Message
