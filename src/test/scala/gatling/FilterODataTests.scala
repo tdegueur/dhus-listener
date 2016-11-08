@@ -20,6 +20,12 @@ class FilterODataTests extends Simulation {
 	val sets = csv("entitysets.csv").queue // fields: entitySetName
 	val operators = csv("operators.csv").queue // fields: operator
 
+	/* 
+	 TODO 
+	 	- add feeders that provide filter arguments
+	 	- use operator filter in scenario
+	*/
+
 	sealed class EntitySet protected (val entitySetName : String, val properties : FeederBuilder[_], val propertyCount : Int) {
 		val filter = repeat(propertyCount) {
 			exec(http("Service")
@@ -31,6 +37,7 @@ class FilterODataTests extends Simulation {
 		} 
 	}
 
+	// fields in properties feeders: property
 	object Connections extends EntitySet("Connections", csv("Connections-properties.csv").queue, 9)
 	object Networks extends EntitySet("Networks", csv("Networks-properties.csv").queue, 1)
 	object SystemRoles extends EntitySet("SystemRoles", csv("SystemRoles-properties.csv").queue, 2)
@@ -46,9 +53,35 @@ class FilterODataTests extends Simulation {
 	object Restrictions extends EntitySet("Restrictions", csv("Restrictions-properties.csv").queue, 3)
 	object Classes extends EntitySet("Classes", csv("Classes-properties.csv").queue, 2)
 	
-	val browseEntitySets = scenario("Filter Entity Sets").exec(Products.filter)
+	val filterConnections = scenario("Filter Connections").exec(Connections.filter)
+	val filterNetworks = scenario("Filter Networks").exec(Networks.filter)
+	val filterSystemRoles = scenario("Filter SystemRoles").exec(SystemRoles.filter)
+	val filterProducts = scenario("Filter Products").exec(Products.filter)
+	val filterAttributes = scenario("Filter Attributes").exec(Attributes.filter)
+	val filterSynchronizers = scenario("Filter Synchronizers").exec(Synchronizers.filter)
+	val filterUsers = scenario("Filter Users").exec(Users.filter)
+	val filterNodes = scenario("Filter Nodes").exec(Nodes.filter)
+	val filterNetworkStatistics = scenario("Filter NetworkStatistics").exec(NetworkStatistics.filter)
+	val filterIngests = scenario("Filter Ingests").exec(Ingests.filter)
+	val filterUserSynchronizers = scenario("Filter UserSynchronizers").exec(UserSynchronizers.filter)
+	val filterCollections = scenario("Filter Collections").exec(Collections.filter)
+	val filterRestrictions = scenario("Filter Restrictions").exec(Restrictions.filter)
+	val filterClasses = scenario("Filter Classes").exec(Classes.filter)
 
 	setUp(
-    	browseEntitySets.inject(rampUsers(9) over (10 seconds)) // scenario will be executed i times over n seconds
+    	filterConnections.inject(rampUsers(1) over (20 seconds)) // scenario will be executed i times over n seconds
+    	filterNetworks.inject(rampUsers(1) over (20 seconds))
+    	filterSystemRoles.inject(rampUsers(1) over (20 seconds))
+    	filterProducts.inject(rampUsers(1) over (20 seconds))
+    	filterAttributes.inject(rampUsers(1) over (20 seconds))
+    	filterSynchronizers.inject(rampUsers(1) over (20 seconds))
+    	filterUsers.inject(rampUsers(1) over (20 seconds))
+    	filterNodes.inject(rampUsers(1) over (20 seconds))
+    	filterNetworkStatistics.inject(rampUsers(1) over (20 seconds))
+    	filterIngests.inject(rampUsers(1) over (20 seconds))
+    	filterUserSynchronizers.inject(rampUsers(1) over (20 seconds))
+    	filterCollections.inject(rampUsers(1) over (20 seconds))
+    	filterRestrictions.inject(rampUsers(1) over (20 seconds))
+    	filterClasses.inject(rampUsers(1) over (20 seconds))
   	).protocols(httpConf)
 }
