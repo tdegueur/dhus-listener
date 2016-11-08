@@ -1,2 +1,2 @@
-property
-Id
+property, eqValue, neValue
+Id, '', ''

@@ -60,8 +60,13 @@ public class EntitySets {
       Map<String, List<String>> entitySetsProperties = new HashMap<String, List<String>>();
       for(EdmEntitySet entitySet : edm.getEntitySets()) {
          List<String> propertyNames = new ArrayList<>();
-         propertyNames.add("property");
-         propertyNames.addAll(entitySet.getEntityType().getPropertyNames());
+         propertyNames.add("property, eqValue, neValue");
+         //propertyNames.addAll(entitySet.getEntityType().getPropertyNames());
+         
+         for(String propertyName : entitySet.getEntityType().getPropertyNames()) {
+            propertyNames.add(propertyName+", '', ''");
+         }
+         
          entitySetsProperties.put(
                entitySet.getName(),
                propertyNames);

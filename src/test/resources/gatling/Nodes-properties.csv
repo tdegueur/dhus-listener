@@ -1,7 +1,7 @@
-property
-Id
-Name
-ContentType
-ContentLength
-ChildrenNumber
-Value
+property, eqValue, neValue
+Id, '', ''
+Name, '', ''
+ContentType, '', ''
+ContentLength, '', ''
+ChildrenNumber, '', ''
+Value, '', ''

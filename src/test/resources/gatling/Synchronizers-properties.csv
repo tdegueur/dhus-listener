@@ -1,19 +1,19 @@
-property
-Id
-Label
-CreationDate
-ModificationDate
-ServiceUrl
-ServiceLogin
-ServicePassword
-RemoteIncoming
-Schedule
-PageSize
-CopyProduct
-FilterParam
-SourceCollection
-LastIngestionDate
-Request
-Status
-StatusDate
-StatusMessage
+property, eqValue, neValue
+Id, '', ''
+Label, '', ''
+CreationDate, '', ''
+ModificationDate, '', ''
+ServiceUrl, '', ''
+ServiceLogin, '', ''
+ServicePassword, '', ''
+RemoteIncoming, '', ''
+Schedule, '', ''
+PageSize, '', ''
+CopyProduct, '', ''
+FilterParam, '', ''
+SourceCollection, '', ''
+LastIngestionDate, '', ''
+Request, '', ''
+Status, '', ''
+StatusDate, '', ''
+StatusMessage, '', ''

@@ -1,10 +1,10 @@
-property
-Id
-Date
-RemoteIp
-Request
-Duration
-ContentLength
-WrittenContentLength
-Status
-Message
+property, eqValue, neValue
+Id, '', ''
+Date, '', ''
+RemoteIp, '', ''
+Request, '', ''
+Duration, '', ''
+ContentLength, '', ''
+WrittenContentLength, '', ''
+Status, '', ''
+Message, '', ''

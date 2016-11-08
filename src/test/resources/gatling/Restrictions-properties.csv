@@ -1,4 +1,4 @@
-property
-UUID
-RestrictionType
-Reason
+property, eqValue, neValue
+UUID, '', ''
+RestrictionType, '', ''
+Reason, '', ''

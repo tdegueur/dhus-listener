@@ -33,11 +33,14 @@ class FilterODataTests extends Simulation {
 			.pause(1)
 			.feed(properties)
 			.exec(http(entitySetName)
-				.get("/"+entitySetName+"?$filter=${property} eq ''"))
+				.get("/"+entitySetName+"?$filter=${property} Eq ${eqValue}"))
+			.pause(1)
+			.exec(http(entitySetName)
+				.get("/"+entitySetName+"?$filter=${property} Ne ${neValue}"))
 		} 
 	}
 
-	// fields in properties feeders: property
+	// fields in properties feeders: property, eqValue, neValue
 	object Connections extends EntitySet("Connections", csv("Connections-properties.csv").queue, 9)
 	object Networks extends EntitySet("Networks", csv("Networks-properties.csv").queue, 1)
 	object SystemRoles extends EntitySet("SystemRoles", csv("SystemRoles-properties.csv").queue, 2)

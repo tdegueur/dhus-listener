@@ -1,15 +1,15 @@
-property
-Id
-Name
-ContentType
-ContentLength
-ChildrenNumber
-Value
-CreationDate
-IngestionDate
-EvictionDate
-ContentDate
-Checksum
-ContentGeometry
-Metalink
-LocalPath
+property, eqValue, neValue
+Id, '', ''
+Name, '', ''
+ContentType, '', ''
+ContentLength, '', ''
+ChildrenNumber, '', ''
+Value, '', ''
+CreationDate, '', ''
+IngestionDate, '', ''
+EvictionDate, '', ''
+ContentDate, '', ''
+Checksum, '', ''
+ContentGeometry, '', ''
+Metalink, '', ''
+LocalPath, '', ''
