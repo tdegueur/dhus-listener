@@ -59,9 +59,12 @@ public class EntitySets {
    private Map<String, List<String>> getProperties(Edm edm) throws EdmException {
       Map<String, List<String>> entitySetsProperties = new HashMap<String, List<String>>();
       for(EdmEntitySet entitySet : edm.getEntitySets()) {
+         List<String> propertyNames = new ArrayList<>();
+         propertyNames.add("property");
+         propertyNames.addAll(entitySet.getEntityType().getPropertyNames());
          entitySetsProperties.put(
                entitySet.getName(),
-               entitySet.getEntityType().getPropertyNames());
+               propertyNames);
       }
       
       return entitySetsProperties;
@@ -73,13 +76,15 @@ public class EntitySets {
       
       
       List<String> names = entitySets.getNames(edm);
-      Path file = Paths.get("target/entitysets.csv");
+      Path file = Paths.get("src/test/resources/gatling/entitysets.csv");
       Files.write(file, names, Charset.forName("UTF-8"));
+      System.out.println("EntitySets done.");
       
       Map<String, List<String>> properties = entitySets.getProperties(edm);
       for(String entitySetName : properties.keySet()) {
-         Path propertyFile = Paths.get("target/"+entitySetName+"-properties.csv");
+         Path propertyFile = Paths.get("src/test/resources/gatling/"+entitySetName+"-properties.csv");
          Files.write(propertyFile, properties.get(entitySetName), Charset.forName("UTF-8"));
       }
+      System.out.println("Properties done.");
    }
 }
