@@ -59,17 +59,16 @@ public class EntitySets {
    private Map<String, List<String>> getProperties(Edm edm) throws EdmException {
       Map<String, List<String>> entitySetsProperties = new HashMap<String, List<String>>();
       for(EdmEntitySet entitySet : edm.getEntitySets()) {
-         List<String> propertyNames = new ArrayList<>();
-         propertyNames.add("property, eqValue, neValue");
-         //propertyNames.addAll(entitySet.getEntityType().getPropertyNames());
+         List<String> csvLine = new ArrayList<>();
+         csvLine.add("property, eqValue, neValue");
          
          for(String propertyName : entitySet.getEntityType().getPropertyNames()) {
-            propertyNames.add(propertyName+", '', ''");
+            csvLine.add(propertyName+", '', ''");
          }
          
          entitySetsProperties.put(
                entitySet.getName(),
-               propertyNames);
+               csvLine);
       }
       
       return entitySetsProperties;
