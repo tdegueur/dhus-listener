@@ -48,7 +48,7 @@ public class EntitySets {
    
    private List<String> getNames(Edm edm) throws EdmException {
       List<String> names = new ArrayList<String>();
-      names.add("entitySets");
+      names.add("entitySetName");
       for(EdmEntitySet entitySet : edm.getEntitySets()) {
          names.add(entitySet.getName());
       }
