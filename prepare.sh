@@ -1,5 +1,5 @@
 #! /bin/sh
-cd /home/dhus/go-dhus-environment
+cd /home/dhus/go-dhus-environment \
 && rm -rf ./dhus \
 && mkdir ./dhus \
 && unzip -o dhus-software-distribution.zip -d ./dhus \
