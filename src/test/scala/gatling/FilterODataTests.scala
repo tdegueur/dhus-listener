@@ -72,19 +72,19 @@ class FilterODataTests extends Simulation {
 	val filterClasses = scenario("Filter Classes").exec(Classes.filter)
 
 	setUp(
-    	filterConnections.inject(rampUsers(1) over (20 seconds)) // scenario will be executed i times over n seconds
-    	filterNetworks.inject(rampUsers(1) over (20 seconds))
-    	filterSystemRoles.inject(rampUsers(1) over (20 seconds))
-    	filterProducts.inject(rampUsers(1) over (20 seconds))
-    	filterAttributes.inject(rampUsers(1) over (20 seconds))
-    	filterSynchronizers.inject(rampUsers(1) over (20 seconds))
-    	filterUsers.inject(rampUsers(1) over (20 seconds))
-    	filterNodes.inject(rampUsers(1) over (20 seconds))
-    	filterNetworkStatistics.inject(rampUsers(1) over (20 seconds))
-    	filterIngests.inject(rampUsers(1) over (20 seconds))
-    	filterUserSynchronizers.inject(rampUsers(1) over (20 seconds))
-    	filterCollections.inject(rampUsers(1) over (20 seconds))
-    	filterRestrictions.inject(rampUsers(1) over (20 seconds))
+    	filterConnections.inject(rampUsers(1) over (20 seconds)), // scenario will be executed i times over n seconds
+    	filterNetworks.inject(rampUsers(1) over (20 seconds)),
+    	filterSystemRoles.inject(rampUsers(1) over (20 seconds)),
+    	filterProducts.inject(rampUsers(1) over (20 seconds)),
+    	filterAttributes.inject(rampUsers(1) over (20 seconds)),
+    	filterSynchronizers.inject(rampUsers(1) over (20 seconds)),
+    	filterUsers.inject(rampUsers(1) over (20 seconds)),
+    	filterNodes.inject(rampUsers(1) over (20 seconds)),
+    	filterNetworkStatistics.inject(rampUsers(1) over (20 seconds)),
+    	filterIngests.inject(rampUsers(1) over (20 seconds)),
+    	filterUserSynchronizers.inject(rampUsers(1) over (20 seconds)),
+    	filterCollections.inject(rampUsers(1) over (20 seconds)),
+    	filterRestrictions.inject(rampUsers(1) over (20 seconds)),
     	filterClasses.inject(rampUsers(1) over (20 seconds))
   	).protocols(httpConf)
 }
