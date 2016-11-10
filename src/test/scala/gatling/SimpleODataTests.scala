@@ -23,7 +23,7 @@ class SimpleODataTests extends Simulation {
 				.get("/"))
 			.pause(1)
 			.feed(sets)
-			.exec(http("Entity Set")
+			.exec(http("Entity Set ${entitySetName}")
 				.get("/${entitySetName}"))
 	}
 

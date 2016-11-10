@@ -1,15 +1,10 @@
 entitySetName
 Connections
 Networks
-SystemRoles
 Products
-Attributes
 Synchronizers
 Users
-Nodes
-NetworkStatistics
 Ingests
 UserSynchronizers
 Collections
-Restrictions
 Classes
