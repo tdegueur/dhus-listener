@@ -29,14 +29,14 @@ class FilterODataTests extends Simulation {
 	sealed class EntitySet protected (val entitySetName : String, val properties : FeederBuilder[_], val propertyCount : Int) {
 		val filter = repeat(propertyCount) {
 			exec(http("Service")
-				.get("/"))
+				.get("/").check(status.is(200)))
 			.pause(1)
 			.feed(properties)
 			.exec(http(entitySetName)
-				.get("/"+entitySetName+"?$filter=${property} Eq ${eqValue}"))
+				.get("/"+entitySetName+"?$filter=${property} Eq ${eqValue}").check(status.is(200)))
 			.pause(1)
 			.exec(http(entitySetName)
-				.get("/"+entitySetName+"?$filter=${property} Ne ${neValue}"))
+				.get("/"+entitySetName+"?$filter=${property} Ne ${neValue}").check(status.is(200)))
 		} 
 	}
 
@@ -71,5 +71,6 @@ class FilterODataTests extends Simulation {
     	filterUserSynchronizers.inject(rampUsers(1) over (20 seconds)),
     	filterCollections.inject(rampUsers(1) over (20 seconds)),
     	filterClasses.inject(rampUsers(1) over (20 seconds))
-  	).protocols(httpConf)
+  	).assertions(global.failedRequests.percent.is(0))
+  	.protocols(httpConf)
 }

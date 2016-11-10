@@ -20,16 +20,17 @@ class SimpleODataTests extends Simulation {
 
 	object EntitySets {
 		val browse = exec(http("Service")
-				.get("/"))
+				.get("/").check(status.is(200)))
 			.pause(1)
 			.feed(sets)
 			.exec(http("Entity Set ${entitySetName}")
-				.get("/${entitySetName}"))
+				.get("/${entitySetName}").check(status.is(200)))
 	}
 
 	val browseEntitySets = scenario("Browse Entity Sets").exec(EntitySets.browse)
 
 	setUp(
     	browseEntitySets.inject(rampUsers(9) over (10 seconds)) // scenario will be executed i times over n seconds
-  	).protocols(httpConf)
+  	).assertions(global.failedRequests.percent.is(0))
+  	.protocols(httpConf)
 }
