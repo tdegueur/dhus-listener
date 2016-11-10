@@ -33,10 +33,10 @@ class FilterODataTests extends Simulation {
 			.pause(1)
 			.feed(properties)
 			.exec(http(entitySetName)
-				.get("/"+entitySetName+"?$filter=${property} Eq ${eqValue}").check(status.is(200)))
+				.get("/"+entitySetName+"?$filter=${property} eq ${eqValue}").check(status.is(200)))
 			.pause(1)
 			.exec(http(entitySetName)
-				.get("/"+entitySetName+"?$filter=${property} Ne ${neValue}").check(status.is(200)))
+				.get("/"+entitySetName+"?$filter=${property} ne ${neValue}").check(status.is(200)))
 		} 
 	}
 
